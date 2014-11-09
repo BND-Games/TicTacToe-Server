@@ -34,7 +34,11 @@ public class engine {
                     handleConnection(client);
                 } catch (IOException e) {
                     System.out.println("Fehler: " + e);
+                    server.close();
+                    return;
+                    
                 }
+                server.close();
 
             }
         } catch (IOException ex) {
