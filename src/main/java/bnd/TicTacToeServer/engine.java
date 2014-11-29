@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +21,23 @@ public class engine {
 
     public static void main(String args[]) {
         try {
+        	Timer timer = new Timer();
+            // Start in einer Sekunde dann Ablauf alle 5 Sekunden
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        if (sql.conn.isClosed()) {
+                            System.out.println("Datenbankverbindung ist unterbrochen");
+                            sql.verbinden();
+                        }
+                    } catch (SQLException ex) {
+                        System.out.println("Fehler: " + ex);
+                    }
+                }
+            }, 20 * 1000, 10 * 1000);
+        	
+        	
             //MySql verbindung aufbauen
             sql = new mysql();
             sql.verbinden();
@@ -35,10 +54,8 @@ public class engine {
                 } catch (IOException e) {
                     System.out.println("Fehler: " + e);
                     server.close();
-                    return;
-                    
+                    return;                    
                 }
-                server.close();
             }
         } catch (IOException ex) {
             Logger.getLogger(engine.class.getName()).log(Level.SEVERE, null, ex);
