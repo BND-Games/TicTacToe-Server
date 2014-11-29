@@ -24,7 +24,7 @@ public class mysql {
         try {
             String userName = "root";
             String password = "realschule";
-            String url = "jdbc:mysql://localhost/tictactoe";
+            String url = "jdbc:mysql://92.222.181.78//tictactoe";
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             this.conn = DriverManager.getConnection(url, userName, password);
             this.s = this.conn.createStatement();
