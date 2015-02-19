@@ -23,7 +23,7 @@ public class mysql {
     public void verbinden() {
         try {
             String userName = "root";
-            String password = "realschule";
+            String password = "";
             String url = "jdbc:mysql://localhost/tictactoe";
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             this.conn = DriverManager.getConnection(url, userName, password);
